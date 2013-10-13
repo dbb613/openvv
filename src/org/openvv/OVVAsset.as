@@ -16,14 +16,15 @@
  */
 package org.openvv
 {
-  import flash.display.Sprite;
+  import flash.display.DisplayObject;
   import flash.external.ExternalInterface;
+  import flash.events.EventDispatcher;
   import flash.events.TimerEvent;
   import flash.utils.Timer;
   import org.openvv.OVVCheck;
   import org.openvv.events.OVVEvent;
 
-  public class OVVAsset extends Sprite
+  public class OVVAsset extends EventDispatcher
   {
     private static const IMPRESSION_THRESHOLD:Number = 20;
     private static const IMPRESSION_DELAY:Number = 250;
@@ -34,17 +35,16 @@ package org.openvv
     private var _impressionTimer:Timer;
     private var _intervalsInView:Number;
 
-    public function OVVAsset(id:String="")
+    public function OVVAsset(displayedObject:DisplayObject)
     {
-      _id = id;
-
       if (!ExternalInterface.available)
       {
         raiseError("ExternalInterface unavailable");
         return;
       }
 
-      _viewabilityCheck = new OVVCheck(_id);
+      _id = generateId();
+      _viewabilityCheck = new OVVCheck(_id, displayedObject);
 
       _intervalsInView = 0;
       _impressionTimer = new Timer(IMPRESSION_DELAY);
@@ -82,6 +82,11 @@ package org.openvv
         raiseImpression();
         _impressionTimer.stop();
       }
+    }
+
+    private function generateId():String
+    {
+      return "ovv" + Math.floor(Math.random()*1000000000).toString();
     }
 
     private function raiseImpression():void
