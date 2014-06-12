@@ -145,8 +145,16 @@ public class OVVCheck {
 					return results;
 				}
 			]]></script>;
+
+	try
+	{
 		var results:Object = ExternalInterface.call(js, uniqueId ) as Object;
-    _results = finalizeResults(results);
+    	_results = finalizeResults(results);
+	}
+	catch(e:Error)
+	{
+		trace("error finalizing results");
+	}
 
     return _results;
 	}
