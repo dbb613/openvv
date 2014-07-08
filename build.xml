@@ -31,15 +31,13 @@
 		</fail>
 		<mxmlc file="${src.dir}/org/openvv/OVVBeacon.as"
 			   output="${bin.dir}/OVVBeacon.swf"
-			   target-player="11.1"
-			   swf-version="11"
 			   static-rsls="true">
 			<source-path path-element="${src.dir}"/>
 		</mxmlc>
 	</target>
 
 	<target name="swc" depends="sign-version">
-		<compc output="${bin.dir}/openvv.swc" target-player="11.1"
+		<compc output="${bin.dir}/openvv.swc"
 			   include-classes="org.openvv.OVVAsset org.openvv.OVVCheck org.openvv.OVVRenderMeter org.openvv.OVVThrottleType org.openvv.events.OVVEvent net.iab.IVPAID net.iab.VPAIDEvent org.openvv.OVVVersion">
 			<source-path path-element="${src.dir}"/>
 		</compc>
@@ -53,8 +51,6 @@
 		</fail>
 		<mxmlc file="${src.dir}/Main.as"
 			   output="${bin.dir}/demo.swf"
-			   target-player="11.1"
-			   swf-version="11"
 			   static-rsls="true">
 			<source-path path-element="${src.dir}"/>
 		</mxmlc>
