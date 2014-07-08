@@ -2,7 +2,6 @@
 <project name="OpenVV"
 		 basedir="."
 		 default="compileAll">
-
 	<property environment="env"/>
  	<property name="FLEX_HOME" value="${env.FLEX_HOME}"/>
 	
@@ -29,7 +28,7 @@
 
 	<target name="swc">
 		<compc output="${bin.dir}/openvv.swc"
-			   include-classes="org.openvv.OVVAsset org.openvv.OVVCheck org.openvv.OVVRenderMeter org.openvv.OVVThrottleType org.openvv.events.OVVEvent">
+			   include-classes="org.openvv.OVVAsset org.openvv.OVVCheck org.openvv.OVVRenderMeter org.openvv.OVVThrottleType org.openvv.events.OVVEvent net.iab.IVPAID net.iab.VPAIDEvent">
 			<source-path path-element="${src.dir}"/>
 		</compc>
 	</target>
