@@ -7,6 +7,7 @@ package
     import flash.utils.Timer;
     import org.openvv.OVVAsset;
     import org.openvv.OVVCheck;
+    import org.openvv.OVVVersion;
 	
 	/**
 	 * ...
@@ -27,6 +28,9 @@ package
 			// entry point
             
             var asset:OVVAsset = new OVVAsset("../bin/OVVBeacon.swf");
+
+            ExternalInterface.call("console.log", "Version=" + OVVVersion.getVersion());
+
             var check:OVVCheck = null;
             var timer:Timer = new Timer(1000);  // call once per second to keep the output reasonable
             timer.addEventListener(TimerEvent.TIMER, function(e:TimerEvent):void {

@@ -10,3 +10,4 @@ bin/
 asdoc/
 jsdoc/
 obj/
+src/org/openvv/OVVVersion.as
