@@ -1,17 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <project name="OpenVV"
 		 basedir="."
-		 default="swc">
-
-	<property name="FLEX_HOME" value=""/>
-
+		 default="compileAll">
+	<property environment="env"/>
+ 	<property name="FLEX_HOME" value="${env.FLEX_HOME}"/>
+	
 	<property name="src.dir" value="src" />
 	<property name="bin.dir" value="bin" />
 	<property name="asdoc.dir" value="asdoc" />
 	
 	<taskdef resource="flexTasks.tasks" classpath="${FLEX_HOME}/ant/lib/flexTasks.jar"/>
 	
-	<target name="compileBeacon">
+  <target name="compileAll" depends="compileBeacon, swc, compileDemo"></target>
+  
+  <target name="sign-version">
+	  <sequential>
+      <echo>Signing build with version: ${build.version}</echo>
+      <delete file="${src.dir}/org/openvv/OVVVersion.as" />
+      <filter token="version" value="${build.version}"  />
+      <copy file="util/Version.as.template" toFile="${src.dir}/org/openvv/OVVVersion.as" filtering="true">
+      </copy>
+	  </sequential>
+	</target>
+
+	<target name="compileBeacon" depends="sign-version">
 		<fail message="You must set FLEX_HOME to your SDK's home directory">
 			<condition>
 				<equals arg1="${FLEX_HOME}" arg2="" />
@@ -24,12 +36,27 @@
 		</mxmlc>
 	</target>
 
-	<target name="swc">
+	<target name="swc" depends="sign-version">
 		<compc output="${bin.dir}/openvv.swc"
-			   include-classes="org.openvv.OVVAsset org.openvv.OVVCheck org.openvv.OVVRenderMeter org.openvv.OVVThrottleType org.openvv.events.OVVEvent net.iab.IVPAID net.iab.VPAIDEvent">
+			   include-classes="org.openvv.OVVAsset org.openvv.OVVCheck org.openvv.OVVRenderMeter org.openvv.OVVThrottleType org.openvv.events.OVVEvent net.iab.IVPAID net.iab.VPAIDEvent org.openvv.OVVVersion">
 			<source-path path-element="${src.dir}"/>
 		</compc>
 	</target>
+    
+    <target name="compileDemo">
+		<fail message="You must set FLEX_HOME to your SDK's home directory">
+			<condition>
+				<equals arg1="${FLEX_HOME}" arg2="" />
+			</condition>
+		</fail>
+		<mxmlc file="${src.dir}/Main.as"
+			   output="${bin.dir}/demo.swf"
+			   static-rsls="true">
+			<source-path path-element="${src.dir}"/>
+		</mxmlc>
+	</target>
+
+    
 
 	<target name="doc">
 		<asdoc output="${asdoc.dir}" lenient="true" failonerror="true"> 
