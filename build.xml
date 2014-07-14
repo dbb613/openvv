@@ -2,9 +2,9 @@
 <project name="OpenVV"
 		 basedir="."
 		 default="compileAll">
+
 	<property environment="env"/>
  	<property name="FLEX_HOME" value="${env.FLEX_HOME}"/>
-	
 	<property name="src.dir" value="src" />
 	<property name="bin.dir" value="bin" />
 	<property name="asdoc.dir" value="asdoc" />
@@ -23,12 +23,7 @@
 	  </sequential>
 	</target>
 
-	<target name="compileBeacon" depends="sign-version">
-		<fail message="You must set FLEX_HOME to your SDK's home directory">
-			<condition>
-				<equals arg1="${FLEX_HOME}" arg2="" />
-			</condition>
-		</fail>
+	<target name="compileBeacon" depends="checkEnv, sign-version">
 		<mxmlc file="${src.dir}/org/openvv/OVVBeacon.as"
 			   output="${bin.dir}/OVVBeacon.swf"
 			   static-rsls="true">
@@ -36,19 +31,14 @@
 		</mxmlc>
 	</target>
 
-	<target name="swc" depends="sign-version">
+	<target name="swc" depends="checkEnv, sign-version">
 		<compc output="${bin.dir}/openvv.swc"
 			   include-classes="org.openvv.OVVAsset org.openvv.OVVCheck org.openvv.OVVRenderMeter org.openvv.OVVThrottleType org.openvv.events.OVVEvent net.iab.IVPAID net.iab.VPAIDEvent org.openvv.OVVVersion">
 			<source-path path-element="${src.dir}"/>
 		</compc>
 	</target>
     
-    <target name="compileDemo">
-		<fail message="You must set FLEX_HOME to your SDK's home directory">
-			<condition>
-				<equals arg1="${FLEX_HOME}" arg2="" />
-			</condition>
-		</fail>
+    <target name="compileDemo" depends="checkEnv">
 		<mxmlc file="${src.dir}/Main.as"
 			   output="${bin.dir}/demo.swf"
 			   static-rsls="true">
@@ -64,11 +54,19 @@
 		</asdoc>
 	</target>
 
-
 	<target name="clean">
 		<delete dir="${bin.dir}" failonerror="false" />
 		<delete dir="${asdoc.dir}" failonerror="false" />
 		<delete dir="${JSDOC_DIR}" failonerror="false" />	
 	</target>
 
+	<target name="checkEnv">
+		<fail message="You must set the FLEX_HOME environment variable to your SDK's home directory">
+			<condition>
+				<not>
+					<isset property="env.FLEX_HOME"/>
+			  </not>
+			</condition>
+		</fail>
+	</target>
 </project>
