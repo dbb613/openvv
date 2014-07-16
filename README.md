@@ -23,17 +23,6 @@ ant
 * Incorporate the SWC `bin/openvv.swc` into your project
 * Move the newly created `bin/Beacon.swf` to a publicly accessible web location.
 
-## Initialize OpenVV 
-* Instantiate `OVVAsset` and pass the URL of your Beacon in:
-```actionscript
-var asset:OVVAsset = new OVVAsset('http://localhost/OVVBeacon.swf');
-```
-* Get viewability data at any time by calling `OVVAsset.checkViewability()`.
-```actionscript
-var check:OVVCheck = asset.checkViewability();
-```
-* Query the properties of the `OVVCheck` object to report on your player's viewability.
-
 
 ###### Alternatively if you are on Mac OS X or another Unix-like platform that supports bash, you can run
 
@@ -56,6 +45,18 @@ ant compile-lib
 ```
 ant compile-beacon
 ```
+
+
+## Initialize OpenVV 
+* Instantiate `OVVAsset` and pass the URL of your Beacon in:
+```actionscript
+var asset:OVVAsset = new OVVAsset('http://localhost/OVVBeacon.swf');
+```
+* Get viewability data at any time by calling `OVVAsset.checkViewability()`.
+```actionscript
+var check:OVVCheck = asset.checkViewability();
+```
+* Query the properties of the `OVVCheck` object to report on your player's viewability.
 
 
 3rd party integration
