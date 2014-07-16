@@ -196,6 +196,8 @@ package org.openvv {
          */
         public function OVVAsset(beaconSwfUrl:String = null, id:String = null, stage:Stage=null) {
             
+            trace("OpenVV ", "[" + this + "]", "Build/Ver: " + OVVVersion.getVersion());
+
             if (!externalInterfaceIsAvailable()) {
                 dispatchEvent(new OVVEvent(OVVEvent.OVVError, {
                     "message": "ExternalInterface unavailable"
