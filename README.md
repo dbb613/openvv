@@ -60,10 +60,10 @@ var check:OVVCheck = asset.checkViewability();
 
 The properties are:
 
-* <code>viewabilityState</code>: String Indicates whether or not the asset is viewable. Possible values are "viewable", "notViewable", "unmeasurable"
+* <code>viewabilityState</code>: string Indicates whether or not the asset is viewable. Possible values are "viewable", "notViewable", "unmeasurable"
 * <code>clientHeight</code>: int Current height of the client
 * <code>clientWidth</code>: int Current width of the client
-* <code>focus</code>: Bolean Whether or not the tab and browser are in focus
+* <code>focus</code>: boolean Whether or not the tab and browser are in focus
 * <code>objBottom</code>: int Y position of the bottom edge of the embed object
 * <code>objLeft</code>: int X position of the left edge of the embed object
 * <code>objRight</code>: int X position of the right edge of the embed object
