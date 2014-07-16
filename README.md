@@ -1,7 +1,7 @@
 openvv
 ======
 
-# Getting Started
+## Getting Started
 * Clone the repository and cd into the root directory of it.
 * Set the environment variable FLEX_HOME on your system, e.g. 
 
@@ -57,6 +57,18 @@ var asset:OVVAsset = new OVVAsset('http://localhost/OVVBeacon.swf');
 var check:OVVCheck = asset.checkViewability();
 ```
 * Query the properties of the `OVVCheck` object to report on your player's viewability.
+
+The properties are:
+
+* <code>viewabilityState</code>: String Indicates whether or not the asset is viewable. Possible values are "viewable", "notViewable", "unmeasurable"
+* <code>clientHeight</code>: int Current height of the client
+* <code>clientWidth</code>: int Current width of the client
+* <code>focus</code>: Bolean Whether or not the tab and browser are in focus
+* <code>objBottom</code>: int Y position of the bottom edge of the embed object
+* <code>objLeft</code>: int X position of the left edge of the embed object
+* <code>objRight</code>: int X position of the right edge of the embed object
+* <code>objTop</code>: intY position of the top edge of the embed object
+* <code>percentViewable</code>:int The percentage of the embed object's area that is calculated to be in view
 
 
 3rd party integration
