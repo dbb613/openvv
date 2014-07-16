@@ -16,15 +16,11 @@ in your /etc/.profile or ~/.profile on Mac OS X, or Unix-like systems.  My Compu
 
 * Run this from the root directory of OpenVV. It will create new files `bin/openvv.swc` and `bin/OVVBeacon.swf`:
 
-```ant```
+```
+ant
+```
 
-Alternatively if you are on Mac OS X or another Unix-like platform that supports bash, you can run
-
-```./build.sh```
-
-Which has the added benefit of including the current git commit id in a trace statement so your build of OpenVV will report its version at runtime.
-
-* Incorporate the SWC into your project
+* Incorporate the SWC `bin/openvv.swc` into your project
 * Move the newly created `bin/Beacon.swf` to a publicly accessible web location.
 
 ## Initialize OpenVV 
@@ -39,18 +35,24 @@ var check:OVVCheck = asset.checkViewability();
 * Query the properties of the `OVVCheck` object to report on your player's viewability.
 
 
+###### Alternatively if you are on Mac OS X or another Unix-like platform that supports bash, you can run
 
+```
+./build.sh
+```
 
-You can also build the components independently:
+Which has the added benefit of including the current git commit id in a trace statement so your build of OpenVV will report its version at runtime.   This is useful for "production" builds on a CI system.  
 
-## Build the SWC Library:
+###### You can also build the components independently:
+
+* Build the SWC Library:
 
 ```    
 ant compile-lib
 ```
 
-## Build the Beacons
-* Run this from the root directory of OpenVV. It will create a new file at `bin/OVVBeacon.swf`:
+* Build the Beacons
+
 ```
 ant compile-beacon
 ```
